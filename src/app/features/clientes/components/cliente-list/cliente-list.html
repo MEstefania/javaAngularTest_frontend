@@ -1,0 +1,34 @@
+<div class="container mt-4">
+    <h3>Clientes</h3>
+
+    <div class="d-flex align-items-center justify-content-between mb-3">
+        <div class="w-50 me-3">
+            <label for="buscar-clientes" class="visually-hidden">Buscar clientes</label>
+            <input id="buscar-clientes" type="search" class="form-control" placeholder="Buscar clientes..."
+                aria-label="Buscar clientes">
+        </div>
+        <button class="btn btn-success" routerLink="/clientes/nuevo" type="button">Nuevo</button>
+
+    </div>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Nombre</th>
+                <th>Identificación</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let cliente of clientes">
+                <td>{{ cliente.id }}</td>
+                <td>{{ cliente.nombre }}</td>
+                <td>{{ cliente.identificacion }}</td>
+                <td>
+                    <button class="btn btn-warning btn-sm" (click)="editarCliente(cliente.id!)">Editar</button>
+                    <button class="btn btn-danger btn-sm" (click)="eliminarCliente(cliente)">Eliminar</button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>

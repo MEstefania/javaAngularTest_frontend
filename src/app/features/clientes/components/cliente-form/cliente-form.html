@@ -1,0 +1,113 @@
+<div class="container py-4" style="max-width: 900px;">
+
+    <!-- Header -->
+    <div class="card mb-4">
+        <div class="card-body d-flex justify-content-between align-items-center">
+            <div>
+                <h4 class="mb-1">{{ isEditMode ? 'Editar Cliente' : 'Nuevo Cliente' }}</h4>
+                <small class="text-muted">
+                    Complete el formulario para registrar un nuevo cliente
+                </small>
+            </div>
+            <button class="btn btn-outline-secondary" (click)="cancelar()">
+                ✕
+            </button>
+        </div>
+    </div>
+
+    <!-- Formulario -->
+    <form [formGroup]="form" (ngSubmit)="guardar()" class="card">
+        <div class="card-body">
+
+            <div class="row g-3">
+
+                <!-- Nombre -->
+                <div class="col-12">
+                    <label class="form-label">Nombre completo *</label>
+                    <input class="form-control" formControlName="nombre">
+                    <div class="text-danger small" *ngIf="form.get('nombre')?.touched && form.get('nombre')?.invalid">
+                        El nombre es obligatorio
+                    </div>
+                </div>
+
+                <!-- Género -->
+                <div class="col-md-6">
+                    <label class="form-label">Género</label>
+                    <select class="form-select" formControlName="genero">
+                        <option value="">Seleccione...</option>
+                        <option value="Masculino">Masculino</option>
+                        <option value="Femenino">Femenino</option>
+                        <option value="Otro">Otro</option>
+                    </select>
+                </div>
+
+                <!-- Edad -->
+                <div class="col-md-6">
+                    <label class="form-label">Edad</label>
+                    <input type="number" class="form-control" formControlName="edad">
+                    <div class="text-danger small" *ngIf="form.get('edad')?.touched && form.get('edad')?.invalid">
+                        La edad debe ser mayor a 18
+                    </div>
+                </div>
+
+                <!-- Identificación -->
+                <div class="col-md-6">
+                    <label class="form-label">Identificación *</label>
+                    <input class="form-control" maxlength="10" formControlName="identificacion">
+                    <div class="text-danger small"
+                        *ngIf="form.get('identificacion')?.touched && form.get('identificacion')?.invalid">
+                        La identificación es obligatoria y debe tener 10 dígitos
+                    </div>
+                </div>
+
+                <!-- Teléfono -->
+                <div class="col-md-6">
+                    <label class="form-label">Teléfono</label>
+                    <input class="form-control" maxlength="10" formControlName="telefono">
+                </div>
+
+                <!-- Dirección -->
+                <div class="col-12">
+                    <label class="form-label">Dirección</label>
+                    <input class="form-control" formControlName="direccion">
+                    <div class="text-danger small"
+                        *ngIf="form.get('direccion')?.touched && form.get('direccion')?.invalid">
+                        La dirección debe tener al menos 5 caracteres
+                    </div>
+                </div>
+
+                <!-- Contraseña -->
+                <div class="col-md-6">
+                    <label class="form-label">Contraseña *</label>
+                    <input type="password" class="form-control" formControlName="contrasenia">
+                    <div class="text-danger small"
+                        *ngIf="form.get('contrasenia')?.touched && form.get('contrasenia')?.invalid">
+                        La contraseña es obligatoria y debe tener al menos 4 caracteres
+                    </div>
+                </div>
+
+                <!-- Estado -->
+                <div class="col-12">
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" formControlName="estado">
+                        <label class="form-check-label">
+                            Cliente activo
+                        </label>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- Botones -->
+        <div class="card-footer d-flex gap-2">
+            <button type="submit" class="btn btn-primary flex-fill">
+                Guardar
+            </button>
+            <button type="button" class="btn btn-danger flex-fill" (click)="cancelar()" >
+                Cancelar
+            </button>
+        </div>
+    </form>
+</div>
